@@ -12,7 +12,7 @@
         public Cuadrado(decimal ancho)
             : base(ancho)
         {
-
+ 
         }
 
         public override decimal CalcularArea()

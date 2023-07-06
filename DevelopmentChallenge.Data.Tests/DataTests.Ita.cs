@@ -5,14 +5,14 @@
 
 
     [TestFixture]
-    public class DataTestsIta : TestBase
+    public class DataTestsEng : TestBase
     {
         private Idioma idioma;
         private FormasGeometricasService service;
        
-        public DataTestsIta()
+        public DataTestsEng()
         {
-            idioma = new Italiano();
+            idioma = new Ingles();
             service = new FormasGeometricasService(idioma, _messageService);
         }
        

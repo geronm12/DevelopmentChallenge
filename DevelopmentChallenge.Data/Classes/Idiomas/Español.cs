@@ -17,7 +17,7 @@
                 { Keys.Perimetro, "Perimetro" },
                 { Keys.Trapecio,  "Trapecio" },
                 { Keys.Rectangulo,"Rectangulo"},
-                { Keys.Formas, "Formas"}
+                { Keys.Formas,    "Formas"}
             };
         }
     }

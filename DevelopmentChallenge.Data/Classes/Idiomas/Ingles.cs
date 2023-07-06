@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
 
-
     public class Ingles : Idioma
     {
         public Ingles()
@@ -18,7 +17,7 @@
                 { Keys.Perimetro, "Perimeter" },
                 { Keys.Trapecio,  "Trapezoid" },
                 { Keys.Rectangulo,"Rectangle" },
-                { Keys.Formas, "Shapes" }
+                { Keys.Formas,    "Shapes" }
             };
         }
     }
