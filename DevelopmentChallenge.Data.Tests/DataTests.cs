@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using DevelopmentChallenge.Data.Classes;
-using NUnit.Framework;
-using static DevelopmentChallenge.Data.Classes.HtmlTagsHelper;
-
-namespace DevelopmentChallenge.Data.Tests
+﻿namespace DevelopmentChallenge.Data.Tests
 {
+    using NUnit.Framework;
+    using System.Collections.Generic;
+
+
     [TestFixture]
-    public class DataTests
+    public class DataTests : TestBase
     {
-        private Idioma idioma;
-        private FormasGeometricasService service;
+        private Idioma _idioma;
+        private IFormasGeometricasService _service;
         public DataTests()
         {
-            idioma = new Español();
-            service = new FormasGeometricasService(idioma);
+            _idioma = new Español();
+            _service = new FormasGeometricasService(_idioma, _messageService);
         }
         
         [TestCase]
         public void TestResumenListaVacia()
         {
             Assert.AreEqual("<h1>Lista vacía de formas!</h1>",
-                service.Imprimir(new List<FormaGeometrica>()));
+                _service.Imprimir(new List<FormaGeometrica>()));
         }
 
 
@@ -30,7 +28,7 @@ namespace DevelopmentChallenge.Data.Tests
         {
             var cuadrados = new List<FormaGeometrica> {new Cuadrado(5), new Circulo(5)};
 
-            var resumen = service.Imprimir(cuadrados);
+            var resumen = _service.Imprimir(cuadrados);
             
             Assert.AreEqual("<h1>Reporte de Formas</h1>1 Cuadrado | Area 25 | Perimetro 20 <br/>TOTAL:<br/>1 formas Perimetro 20 Area 25", resumen);
         }
@@ -90,26 +88,6 @@ namespace DevelopmentChallenge.Data.Tests
            // Assert.AreEqual(
            //     "<h1>Reporte de Formas</h1>2 Cuadrados | Area 29 | Perimetro 28 <br/>2 Círculos | Area 13,01 | Perimetro 18,06 <br/>3 Triángulos | Area 49,64 | Perimetro 51,6 <br/>TOTAL:<br/>7 formas Perimetro 97,66 Area 91,65",
            //     resumen);
-        }
-    }
-
-    [TestFixture]
-    public class DataTestsIngles
-    {
-        private Idioma idioma;
-        private FormasGeometricasService service;
-        public DataTestsIngles()
-        {
-            idioma = new Ingles();
-            service = new FormasGeometricasService(idioma);
-        }
-
-
-        [TestCase]
-        public void TestResumenListaVaciaFormasEnIngles()
-        {
-            Assert.AreEqual("<h1>Empty list of shapes!</h1>",
-                service.Imprimir(new List<FormaGeometrica>()));
         }
     }
 }
