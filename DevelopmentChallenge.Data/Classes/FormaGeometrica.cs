@@ -37,7 +37,8 @@ namespace DevelopmentChallenge.Data.Classes
         Area,
         Perimetro,
         Trapecio,
-        Rectangulo
+        Rectangulo,
+        Formas
     }
 
     //Nota se podía utilizar una interfaz para declarar ambos o también se podría utilizar recursos externos
@@ -74,7 +75,8 @@ namespace DevelopmentChallenge.Data.Classes
                 { Keys.Area,      "Area" },
                 { Keys.Perimetro, "Perimetro" },
                 { Keys.Trapecio,  "Trapecio" },
-                { Keys.Rectangulo,"Rectangulo"}
+                { Keys.Rectangulo,"Rectangulo"},
+                { Keys.Formas, "Formas"}
             };
         }
     }
@@ -93,7 +95,8 @@ namespace DevelopmentChallenge.Data.Classes
                 { Keys.Area,      "Area" },
                 { Keys.Perimetro, "Perimeter" },
                 { Keys.Trapecio,  "Trapezoid" },
-                { Keys.Rectangulo,"Rectangle"}
+                { Keys.Rectangulo,"Rectangle" },
+                { Keys.Formas, "Shapes" }
             };
         }
     }
@@ -298,7 +301,7 @@ namespace DevelopmentChallenge.Data.Classes
                perimetroTotal += perimetro;
                areaTotal += area;
                
-              sb.Append(_messageService.ObtenerLinea(
+               sb.Append(_messageService.ObtenerLinea(
                           item.Count(), 
                           item.Sum(forma => forma.CalcularArea()), 
                           item.Sum(forma => forma.CalcularPerimetro()), 
@@ -308,9 +311,9 @@ namespace DevelopmentChallenge.Data.Classes
 
            //FOOTER
            sb.Append("TOTAL:<br/>");
-           sb.Append(numeroCuadrados + numeroCirculos + numeroTriangulos + " " + (idioma == Castellano ? "formas" : "shapes") + " ");
-           sb.Append((idioma == Castellano ? "Perimetro " : "Perimeter ") + (perimetroCuadrados + perimetroTriangulos + perimetroCirculos).ToString("#.##") + " ");
-           sb.Append("Area " + (areaCuadrados + areaCirculos + areaTriangulos).ToString("#.##"));
+           sb.Append(numeroItems + " " + _idioma.Traducir(Keys.Formas) + " ");
+           sb.Append(_idioma.Traducir(Keys.Perimetro)+ perimetroTotal.ToString("#.##") + " ");
+           sb.Append(_idioma.Traducir(Keys.Area) + areaTotal.ToString("#.##"));
 
            return sb.ToString();
        }
