@@ -26,34 +26,45 @@ namespace DevelopmentChallenge.Data.Classes
     public static class HtmlTagsHelper
     {
         public static string H1 = "<h1>{0}</h1>";
-        public enum Keys
+    }
+    public enum Keys
+    {
+        ListaVacia,
+        Encabezado,
+        Cuadrado,
+        Triangulo,
+        Circulo,
+        Area,
+        Perimetro,
+        Trapecio,
+        Rectangulo
+    }
+
+    //Nota se podía utilizar una interfaz para declarar ambos o también se podría utilizar recursos externos
+    //Eso nos ahorraría un par de clases
+    //Otra opción sería tener un esquema en la base de datos que permita almacenar los idiomas y
+    //sus traducciones específicas
+    public abstract class Idioma
+    {
+        public virtual Dictionary<Keys, String> Traducciones { get; set; }
+
+        public Idioma()
         {
-            ListaVacia,
-            Encabezado,
-            Cuadrado,
-            Triangulo,
-            Circulo,
-            Area,
-            Perimetro
         }
-
-        public abstract class Idioma
+        public virtual String Traducir(Keys key)
         {
-            public virtual Dictionary<Keys, String> Traducciones { get; set; }
-            public virtual String Traducir(Keys key)
-            {
-                String traduccion = "";
-                Traducciones.TryGetValue(key, out traduccion);
+            String traduccion = "";
+            Traducciones.TryGetValue(key, out traduccion);
 
-                return traduccion;
-            }
+            return traduccion;
         }
-
-        public class Español : Idioma
+    }
+    
+    public class Español : Idioma
+    {
+        public Español()
         {
-            public Español()
-            {
-                this.Traducciones = new Dictionary<Keys, string>()
+            this.Traducciones = new Dictionary<Keys, string>()
             {
                 { Keys.ListaVacia,"Lista vacía de formas!" },
                 { Keys.Encabezado,"Reporte de Formas" },
@@ -61,213 +72,274 @@ namespace DevelopmentChallenge.Data.Classes
                 { Keys.Triangulo, "Triangulo" },
                 { Keys.Circulo,   "Circulo" },
                 { Keys.Area,      "Area" },
-                { Keys.Perimetro, "Perimetro" }
+                { Keys.Perimetro, "Perimetro" },
+                { Keys.Trapecio,  "Trapecio" },
+                { Keys.Rectangulo,"Rectangulo"}
             };
-            }
         }
+    }
 
-        public class Ingles : Idioma
+    public class Ingles : Idioma
+    {
+        public Ingles()
         {
-            public Ingles()
-            {
-                this.Traducciones = new Dictionary<Keys, string>()
-            {
+            this.Traducciones = new Dictionary<Keys, string>()
+                {
                 { Keys.ListaVacia, "Empty list of shapes!" },
                 { Keys.Encabezado, "Shapes report" },
                 { Keys.Cuadrado, "Squre" },
                 { Keys.Triangulo, "Triangle" },
                 { Keys.Circulo,   "Circle" },
                 { Keys.Area,      "Area" },
-                { Keys.Perimetro, "Perimeter" }
+                { Keys.Perimetro, "Perimeter" },
+                { Keys.Trapecio,  "Trapezoid" },
+                { Keys.Rectangulo,"Rectangle"}
             };
-            }
         }
-        public abstract class FormaGeometrica
+    }
+    public abstract class FormaGeometrica
+    {
+        protected readonly decimal _lado;
+        public virtual Keys Key { get;  }
+        public FormaGeometrica(decimal ancho)
         {
-            protected readonly decimal _lado;
-
-
-            public FormaGeometrica(decimal ancho)
-            {
-                _lado = ancho;
-            }
-
-            public virtual string ObtenerLinea(int cantidad, decimal area, decimal perimetro, Idioma idioma)
-            {
-                return string.Empty;
-            }
-
-
-            public virtual string TraducirForma(int cantidad, Idioma idioma)
-            {
-                return string.Empty;
-            }
-
-            public virtual decimal CalcularArea()
-            {
-                throw new ArgumentOutOfRangeException(@"Forma desconocida");
-            }
-
-            public virtual decimal CalcularPerimetro()
-            {
-                throw new ArgumentOutOfRangeException(@"Forma desconocida");
-            }
+            _lado = ancho;
         }
 
-        public class Cuadrado : FormaGeometrica
+        public virtual decimal CalcularArea()
         {
-            public Cuadrado(decimal ancho)
-                : base(ancho)
-            {
-
-            }
-
-            public override decimal CalcularArea()
-            {
-                return this._lado * this._lado;
-            }
-
-            public override decimal CalcularPerimetro()
-            {
-                return _lado * 4;
-            }
-
-            public override string TraducirForma(int cantidad, Idioma idioma)
-            {
-                return cantidad > 1
-                        ? String.Format(HtmlTagsHelper.H1, String.Concat(idioma.Traducir(Keys.Cuadrado), Labels.Pluralizar))
-                        : idioma.Traducir(Keys.Cuadrado);
-            }
-
-            public override string ObtenerLinea(int cantidad, decimal area, decimal perimetro, Idioma idioma)
-            {
-                if (cantidad > 0)
-                {
-                    return $"{cantidad} {idioma.Traducir(Keys.Cuadrado)} |{idioma.Traducir(Keys.Area)} {area:#.##} | {idioma.Traducir(Keys.Perimetro)} {perimetro:#.##} <br/>";
-                }
-
-                return base.ObtenerLinea(cantidad, area, perimetro, idioma);
-            }
+            throw new ArgumentOutOfRangeException(@"Forma desconocida");
         }
 
-        public class TrianguloEquilatero : FormaGeometrica
+        public virtual decimal CalcularPerimetro()
         {
-            public TrianguloEquilatero(decimal ancho)
-                : base(ancho)
-            {
-
-            }
-
-            public override decimal CalcularArea()
-            {
-                return ((decimal)Math.Sqrt(3) / 4) * _lado * _lado;
-            }
-
-            public override decimal CalcularPerimetro()
-            {
-                return _lado * 3;
-            }
-
-            public override string TraducirForma(int cantidad, Idioma idioma)
-            {
-                return cantidad > 1
-                  ? String.Concat(idioma.Traducir(Keys.Triangulo), Labels.Pluralizar)
-                  : idioma.Traducir(Keys.Triangulo);
-            }
-
-            public override string ObtenerLinea(int cantidad, decimal area, decimal perimetro, Idioma idioma)
-            {
-                if (cantidad > 0)
-                {
-                    return $"{cantidad} {idioma.Traducir(Keys.Triangulo)} |{idioma.Traducir(Keys.Area)} {area:#.##} | {idioma.Traducir(Keys.Perimetro)} {perimetro:#.##} <br/>";
-                }
-
-                return base.ObtenerLinea(cantidad, area, perimetro, idioma);
-            }
-        }
-
-        public class Circulo : FormaGeometrica
-        {
-            public Circulo(decimal ancho)
-                : base(ancho)
-            {
-
-            }
-
-            public override decimal CalcularArea()
-            {
-                return (decimal)Math.PI * (_lado / 2) * (_lado / 2);
-            }
-            public override decimal CalcularPerimetro()
-            {
-                return (decimal)Math.PI * _lado;
-            }
-
-            public override string TraducirForma(int cantidad, Idioma idioma)
-            {
-                return cantidad > 1
-                  ? String.Concat(idioma.Traducir(Keys.Circulo), Labels.Pluralizar)
-                  : idioma.Traducir(Keys.Circulo);
-            }
-
-            public override string ObtenerLinea(int cantidad, decimal area, decimal perimetro, Idioma idioma)
-            {
-                if (cantidad > 0)
-                {
-                    return $"{cantidad} {idioma.Traducir(Keys.Circulo)} |{idioma.Traducir(Keys.Area)} {area:#.##} | {idioma.Traducir(Keys.Perimetro)} {perimetro:#.##} <br/>";
-                }
-
-                return base.ObtenerLinea(cantidad, area, perimetro, idioma);
-            }
-        }
-
-        public interface IFormasGeometricasService
-        {
-            string Imprimir(List<FormaGeometrica> formas);
-        }
-
-        public class FormasGeometricasService : IFormasGeometricasService
-        {
-            private readonly Idioma _idioma;
-            public FormasGeometricasService(Idioma idioma)
-            {
-                this._idioma = idioma;
-            }
-            public string Imprimir(List<FormaGeometrica> formas)
-            {
-                var sb = new StringBuilder();
-
-                if (!formas.Any())
-                {
-                    sb.Append(String.Format(HtmlTagsHelper.H1, this._idioma.Traducir(Keys.ListaVacia)));
-                    return sb.ToString();
-                }
-
-                // Hay por lo menos una forma
-                // HEADER
-                sb.Append(this._idioma.Traducir(Keys.Encabezado));
-
-  
-                foreach (var item in formas.GroupBy(forma => forma.GetType()))
-                {
-                    var primerItem = item.First();
-                    String linea = primerItem.ObtenerLinea(item.Count(), item.Sum(forma => forma.CalcularArea()), item.Sum(forma => forma.CalcularPerimetro()), _idioma);
-                    sb.Append(linea);
-                }
-
-            
-
-          
-                // FOOTER
-                //sb.Append("TOTAL:<br/>");
-                //sb.Append(numeroCuadrados + numeroCirculos + numeroTriangulos + " " + (idioma == Castellano ? "formas" : "shapes") + " ");
-                //sb.Append((idioma == Castellano ? "Perimetro " : "Perimeter ") + (perimetroCuadrados + perimetroTriangulos + perimetroCirculos).ToString("#.##") + " ");
-                //sb.Append("Area " + (areaCuadrados + areaCirculos + areaTriangulos).ToString("#.##"));
-
-                return sb.ToString();
-            }
-
+            throw new ArgumentOutOfRangeException(@"Forma desconocida");
         }
     }
 
+    public class Cuadrado : FormaGeometrica
+    {
+        public override Keys Key
+        {
+            get
+            {
+                return Keys.Cuadrado;
+            }
+        }
+        public Cuadrado(decimal ancho)
+            : base(ancho)
+        {
+    
+        }
+    
+        public override decimal CalcularArea()
+        {
+            return this._lado * this._lado;
+        }
+    
+        public override decimal CalcularPerimetro()
+        {
+            return _lado * 4;
+        }
+    
+    }
+
+    public class TrianguloEquilatero : FormaGeometrica
+    {
+        public override Keys Key
+        {
+            get
+            {
+                return Keys.Triangulo;
+            }
+        }
+
+        public TrianguloEquilatero(decimal ancho)
+            : base(ancho)
+        {
+
+        }
+
+        public override decimal CalcularArea()
+        {
+            return ((decimal)Math.Sqrt(3) / 4) * _lado * _lado;
+        }
+
+        public override decimal CalcularPerimetro()
+        {
+            return _lado * 3;
+        }
+    }
+
+    public class Circulo : FormaGeometrica
+    {
+        public override Keys Key
+        {
+            get
+            {
+                return Keys.Circulo;
+            }
+        }
+
+        public Circulo(decimal ancho)
+            : base(ancho)
+        {
+
+        }
+
+        public override decimal CalcularArea()
+        {
+            return (decimal)Math.PI * (_lado / 2) * (_lado / 2);
+        }
+        public override decimal CalcularPerimetro()
+        {
+            return (decimal)Math.PI * _lado;
+        }
+    }
+
+    public class Trapecio : FormaGeometrica
+    {
+        public override Keys Key
+        {
+            get
+            {
+                return Keys.Trapecio;
+            }
+        }
+        public Trapecio(decimal ancho) 
+            : base(ancho)
+        {
+        }
+
+        public override decimal CalcularArea()
+        {
+            return base.CalcularArea();
+        }
+
+        public override decimal CalcularPerimetro()
+        {
+            return base.CalcularPerimetro();
+        }
+    }
+
+    public class Rectangulo : FormaGeometrica
+    {
+        public override Keys Key
+        {
+            get
+            {
+                return Keys.Rectangulo;
+            }
+        }
+
+        private decimal _alto;
+ 
+
+        public Rectangulo(decimal ancho, decimal alto) 
+            : base(ancho)
+        {
+            _alto = alto;
+        }
+
+        public override decimal CalcularArea()
+        {
+            return _lado * _alto;
+        }
+
+        public override decimal CalcularPerimetro()
+        {
+            return (this._lado * 2) + (_alto * 2);
+        }
+    }
+
+    public interface IFormasGeometricasService
+    {
+        string Imprimir(List<FormaGeometrica> formas);
+    }
+
+    public class FormasGeometricasService : IFormasGeometricasService
+    {
+       private readonly Idioma _idioma;
+
+       private readonly IMessage _messageService;
+       
+       public FormasGeometricasService(Idioma idioma, IMessage messageService)
+       {
+           this._idioma = idioma;
+           this._messageService = messageService;
+       }
+
+       public string Imprimir(List<FormaGeometrica> formas)
+       {
+           var sb = new StringBuilder();
+
+           if (!formas.Any())
+           {
+               sb.Append(String.Format(HtmlTagsHelper.H1, this._idioma.Traducir(Keys.ListaVacia)));
+               return sb.ToString();
+           }
+
+           // Hay por lo menos una forma
+           // HEADER
+           sb.Append(this._idioma.Traducir(Keys.Encabezado));
+
+           int numeroItems = 0;
+           decimal perimetroTotal = 0;
+           decimal areaTotal = 0;
+
+           foreach (var item in formas.GroupBy(forma => forma.GetType()))
+           {
+               var primerItem = item.First();
+               int cantidad = item.Count();
+               decimal perimetro = item.Sum(forma => forma.CalcularPerimetro());
+               decimal area = item.Sum(forma => forma.CalcularArea());
+
+               numeroItems += cantidad;
+               perimetroTotal += perimetro;
+               areaTotal += area;
+               
+              sb.Append(_messageService.ObtenerLinea(
+                          item.Count(), 
+                          item.Sum(forma => forma.CalcularArea()), 
+                          item.Sum(forma => forma.CalcularPerimetro()), 
+                          _idioma,
+                          primerItem.Key));
+           }
+
+           //FOOTER
+           sb.Append("TOTAL:<br/>");
+           sb.Append(numeroCuadrados + numeroCirculos + numeroTriangulos + " " + (idioma == Castellano ? "formas" : "shapes") + " ");
+           sb.Append((idioma == Castellano ? "Perimetro " : "Perimeter ") + (perimetroCuadrados + perimetroTriangulos + perimetroCirculos).ToString("#.##") + " ");
+           sb.Append("Area " + (areaCuadrados + areaCirculos + areaTriangulos).ToString("#.##"));
+
+           return sb.ToString();
+       }
+
+    }
+
+    public interface IMessage
+    {
+        string ObtenerLinea(int cantidad, decimal area, decimal perimetro, Idioma idioma, Keys key);
+        string TraducirForma(int cantidad, Idioma idioma, Keys key);
+    }
+
+    public class Message : IMessage
+    {
+        public string ObtenerLinea(int cantidad, decimal area, decimal perimetro, Idioma idioma, Keys key)
+        {
+            if (cantidad > 0)
+            {
+                return $"{cantidad} {idioma.Traducir(key)} |{idioma.Traducir(Keys.Area)} {area:#.##} | {idioma.Traducir(Keys.Perimetro)} {perimetro:#.##} <br/>";
+            }
+
+            return String.Empty;
+        }
+
+        public string TraducirForma(int cantidad, Idioma idioma, Keys key)
+        {
+            return cantidad > 1
+                ? String.Concat(idioma.Traducir(key), Labels.Pluralizar)
+                : idioma.Traducir(key);
+        }
+    }
 }
