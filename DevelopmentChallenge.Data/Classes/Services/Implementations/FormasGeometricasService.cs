@@ -28,8 +28,8 @@
             }
 
             // HEADER
-            sb.Append(this._idioma.Traducir(Keys.Encabezado));
-
+            sb.Append(String.Format(HtmlTagsHelper.H1, _idioma.Traducir(Keys.Encabezado)) + " ");
+            
             int numeroItems = 0;
             decimal perimetroTotal = 0;
             decimal areaTotal = 0;
@@ -57,8 +57,8 @@
             //FOOTER
             sb.Append("TOTAL:<br/>");
             sb.Append(numeroItems + " " + _idioma.Traducir(Keys.Formas) + " ");
-            sb.Append(_idioma.Traducir(Keys.Perimetro) + perimetroTotal.ToString("#.##") + " ");
-            sb.Append(_idioma.Traducir(Keys.Area) + areaTotal.ToString("#.##"));
+            sb.Append($"{_idioma.Traducir(Keys.Perimetro)} {perimetroTotal.ToString("#.##")} ");
+            sb.Append($"{_idioma.Traducir(Keys.Area)} {areaTotal.ToString("#.##")}");
 
             return sb.ToString();
         }
