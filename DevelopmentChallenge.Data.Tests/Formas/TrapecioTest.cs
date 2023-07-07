@@ -1,27 +1,47 @@
 ﻿namespace DevelopmentChallenge.Data.Tests
 {
     using NUnit.Framework;
-    using System;
+
+    [TestFixture]
     public class TrapecioTests : IFormaTest
     {
-        public void TestAlInvocarSuKeyDevuelveNombreSingular()
-        {
-            throw new System.NotImplementedException();
-        }
+        private Trapecio _trapecio;
 
-        public void TestAlInvocarSuPluralDevuelveNombrePlural()
+        public TrapecioTests()
         {
-            throw new System.NotImplementedException();
+            _trapecio = new Trapecio(30, 15, 10, 20, 30);
         }
-
+ 
+        [TestCase]
         public void TestRetornaValorSiSeCalculaElArea()
         {
-            throw new System.NotImplementedException();
+            decimal valorEsperado = 6750;
+            decimal valor = _trapecio.CalcularArea();
+
+            Assert.AreEqual(valorEsperado, valor);
         }
 
+        [TestCase]
         public void TestRetornaValorSiSeCalculaElPerimetro()
         {
-            throw new System.NotImplementedException();
+            decimal valorEsperado = 75;
+            decimal valor = _trapecio.CalcularPerimetro();
+
+            Assert.AreEqual(valorEsperado, valor);
+        }
+
+        [TestCase]
+        public void TestAlInvocarSuKeyDevuelveNombreSingular()
+        {
+            string valorEsperado = "Trapecio";
+            Assert.AreEqual(valorEsperado, _trapecio.Key.ToString());
+        }
+
+        [TestCase]
+        public void TestAlInvocarSuPluralDevuelveNombrePlural()
+        {
+            string valorEsperado = "Trapecios";
+            Assert.AreEqual(valorEsperado, _trapecio.Plural.ToString());
         }
     }
 }

@@ -17,19 +17,27 @@
                 return Keys.Trapecios;
             }
         }
-        public Trapecio(decimal ancho)
+
+        private decimal _baseMenor, _ladoIzq, _ladoDerech, _altura;
+
+        public Trapecio(decimal ancho, decimal baseMenor, decimal ladoIzq, decimal ladoDerech, decimal altura)
             : base(ancho)
         {
+            _baseMenor = baseMenor;
+            _ladoIzq = ladoIzq;
+            _ladoDerech = ladoDerech;
+            _altura = altura;
+
         }
 
         public override decimal CalcularArea()
         {
-            return base.CalcularArea();
+            return ((_lado * _baseMenor) / 2) * _altura;
         }
 
         public override decimal CalcularPerimetro()
         {
-            return base.CalcularPerimetro();
+            return _lado + _baseMenor + _ladoDerech + _ladoIzq;
         }
     }
 
