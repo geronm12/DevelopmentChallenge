@@ -31,7 +31,7 @@
 
             var resumen = _service.Imprimir(cuadrados);
 
-            Assert.AreEqual("<h1>Reporte de Formas</h1> 1 Cuadrado | Area 25 | Perimetro 20 <br/>TOTAL:<br/>1 Formas Perimetro 20 Area 25", resumen);
+            Assert.AreEqual("<h1>Rapporto sui moduli</h1> 1 Piazza | La zona 25 | Perimetro 20 <br/>TOTAL:<br/>1 Forme Perimetro 20 La zona 25", resumen);
         }
 
         [TestCase]
@@ -46,7 +46,7 @@
 
             var resumen = _service.Imprimir(cuadrados);
 
-            Assert.AreEqual("<h1>Reporte de Formas</h1> 3 Cuadrados | Area 35 | Perimetro 36 <br/>TOTAL:<br/>3 Formas Perimetro 36 Area 35", resumen);
+            Assert.AreEqual("<h1>Rapporto sui moduli</h1> 3 Piazze | La zona 35 | Perimetro 36 <br/>TOTAL:<br/>3 Forme Perimetro 36 La zona 35", resumen);
         }
 
         [TestCase]
@@ -66,7 +66,7 @@
             var resumen = _service.Imprimir(formas);
 
             Assert.AreEqual(
-                "<h1>Reporte de Formas</h1> 2 Cuadrados | Area 29 | Perimetro 28 <br/>1 Circulo | Area 7,07 | Perimetro 9,42 <br/>2 Triangulos | Area 42 | Perimetro 39 <br/>2 Rectangulos | Area 550 | Perimetro 140 <br/>TOTAL:<br/>7 Formas Perimetro 216,42 Area 628,07",
+                "<h1>Rapporto sui moduli</h1> 2 Piazze | La zona 29 | Perimetro 28 <br/>1 Cerchio | La zona 7,07 | Perimetro 9,42 <br/>2 Triangoli | La zona 42 | Perimetro 39 <br/>2 Rettangoli | La zona 550 | Perimetro 140 <br/>TOTAL:<br/>7 Forme Perimetro 216,42 La zona 628,07",
                 resumen);
         }
     }
