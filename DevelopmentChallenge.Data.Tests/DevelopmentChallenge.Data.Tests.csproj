@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTests.cs" />
-    <Compile Include="DataTests.Ita.cs" />
+    <Compile Include="DataTests.Eng.cs" />
     <Compile Include="Formas\CirculoTest.cs" />
     <Compile Include="Formas\CuadradadoTest.cs" />
     <Compile Include="Formas\Interface\IFormaTest.cs" />
@@ -78,7 +78,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTests.Eng.cs" />
+    <Compile Include="DataTests.Ita.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
