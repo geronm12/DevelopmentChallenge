@@ -17,7 +17,12 @@
                 { Keys.Perimetro,  "Perimetro" },
                 { Keys.Trapecio,   "Trapezio" },
                 { Keys.Rectangulo, "Rettangolo"},
-                { Keys.Formas,     "Forme"}
+                { Keys.Formas,     "Forme"},
+                { Keys.Circulos, "Cerchi" },
+                { Keys.Cuadrados, "Piazze" },
+                { Keys.Rectangulos, "Rettangoli" },
+                { Keys.Triangulos, "Triangoli" },
+                { Keys.Trapecios, "Trapezi" }
             };
         }
     }

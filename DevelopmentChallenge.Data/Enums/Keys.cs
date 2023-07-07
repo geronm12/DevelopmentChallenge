@@ -11,6 +11,11 @@
         Perimetro,
         Trapecio,
         Rectangulo,
-        Formas
+        Formas,
+        Circulos,
+        Cuadrados,
+        Triangulos,
+        Rectangulos,
+        Trapecios
     }
 }

@@ -9,6 +9,14 @@
                 return Keys.Trapecio;
             }
         }
+
+        public override Keys Plural
+        {
+            get
+            {
+                return Keys.Trapecios;
+            }
+        }
         public Trapecio(decimal ancho)
             : base(ancho)
         {

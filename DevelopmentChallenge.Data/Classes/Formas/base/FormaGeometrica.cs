@@ -18,6 +18,7 @@ namespace DevelopmentChallenge.Data
     {
         protected readonly decimal _lado;
         public virtual Keys Key { get;  }
+        public virtual Keys Plural { get; }
         public FormaGeometrica(decimal ancho)
         {
             _lado = ancho;

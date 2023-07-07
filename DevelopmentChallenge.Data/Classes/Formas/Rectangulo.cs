@@ -10,6 +10,14 @@
             }
         }
 
+        public override Keys Plural
+        {
+            get
+            {
+                return Keys.Rectangulos;
+            }
+        }
+
         private decimal _alto;
 
 

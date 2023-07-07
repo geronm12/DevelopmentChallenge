@@ -1,4 +1,4 @@
-﻿namespace DevelopmentChallenge.Data.Tests.Formas
+﻿namespace DevelopmentChallenge.Data.Tests
 {
     using NUnit.Framework;
 

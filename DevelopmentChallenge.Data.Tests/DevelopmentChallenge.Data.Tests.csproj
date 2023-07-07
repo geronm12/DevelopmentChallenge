@@ -56,7 +56,12 @@
   <ItemGroup>
     <Compile Include="DataTests.cs" />
     <Compile Include="DataTests.Ita.cs" />
+    <Compile Include="Formas\CirculoTest.cs" />
     <Compile Include="Formas\CuadradadoTest.cs" />
+    <Compile Include="Formas\RectanguloTest.cs" />
+    <Compile Include="Formas\TrapecioTest.cs" />
+    <Compile Include="Formas\TrianguloEquilateroTest.cs" />
+    <Compile Include="MessageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>

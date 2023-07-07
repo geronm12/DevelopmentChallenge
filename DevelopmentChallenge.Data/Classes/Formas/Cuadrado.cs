@@ -9,6 +9,15 @@
                 return Keys.Cuadrado;
             }
         }
+
+        public override Keys Plural
+        {
+            get
+            {
+                return Keys.Cuadrados;
+            }
+        }
+
         public Cuadrado(decimal ancho)
             : base(ancho)
         {

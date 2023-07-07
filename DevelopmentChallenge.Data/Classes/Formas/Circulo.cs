@@ -12,6 +12,14 @@
             }
         }
 
+        public override Keys Plural
+        {
+            get
+            {
+                return Keys.Circulos;
+            }
+        }
+
         public Circulo(decimal ancho)
             : base(ancho)
         {

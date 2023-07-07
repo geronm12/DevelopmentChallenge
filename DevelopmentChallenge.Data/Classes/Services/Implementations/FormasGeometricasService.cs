@@ -13,8 +13,8 @@
 
         public FormasGeometricasService(Idioma idioma, IMessage messageService)
         {
-            this._idioma = idioma;
-            this._messageService = messageService;
+            _idioma = idioma;
+            _messageService = messageService;
         }
 
         public string Imprimir(List<FormaGeometrica> formas)
@@ -23,11 +23,10 @@
 
             if (!formas.Any())
             {
-                sb.Append(String.Format(HtmlTagsHelper.H1, this._idioma.Traducir(Keys.ListaVacia)));
+                sb.Append(String.Format(HtmlTagsHelper.H1, _idioma.Traducir(Keys.ListaVacia)));
                 return sb.ToString();
             }
 
-            // Hay por lo menos una forma
             // HEADER
             sb.Append(this._idioma.Traducir(Keys.Encabezado));
 
@@ -51,7 +50,8 @@
                            item.Sum(forma => forma.CalcularArea()),
                            item.Sum(forma => forma.CalcularPerimetro()),
                            _idioma,
-                           primerItem.Key));
+                           primerItem.Key,
+                           primerItem.Plural));
             }
 
             //FOOTER

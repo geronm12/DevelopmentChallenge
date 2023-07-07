@@ -12,6 +12,13 @@
             }
         }
 
+        public override Keys Plural
+        {
+            get
+            {
+                return Keys.Triangulos;
+            }
+        }
         public TrianguloEquilatero(decimal ancho)
             : base(ancho)
         {
