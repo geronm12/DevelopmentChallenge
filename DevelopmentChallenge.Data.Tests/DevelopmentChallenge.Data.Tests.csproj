@@ -58,6 +58,7 @@
     <Compile Include="DataTests.Ita.cs" />
     <Compile Include="Formas\CirculoTest.cs" />
     <Compile Include="Formas\CuadradadoTest.cs" />
+    <Compile Include="Formas\Interface\IFormaTest.cs" />
     <Compile Include="Formas\RectanguloTest.cs" />
     <Compile Include="Formas\TrapecioTest.cs" />
     <Compile Include="Formas\TrianguloEquilateroTest.cs" />

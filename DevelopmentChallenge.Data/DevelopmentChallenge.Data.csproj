@@ -50,7 +50,7 @@
     <Compile Include="Classes\Formas\Rectangulo.cs" />
     <Compile Include="Classes\Formas\Trapecio.cs" />
     <Compile Include="Classes\Formas\TrianguloEquilatero.cs" />
-    <Compile Include="Classes\Helpers\Labels.cs" />
+    <Compile Include="Classes\Helpers\HtmlTagsHelper.cs" />
     <Compile Include="Classes\Idiomas\base\Idioma.cs" />
     <Compile Include="Classes\Idiomas\Español.cs" />
     <Compile Include="Classes\Idiomas\Ingles.cs" />

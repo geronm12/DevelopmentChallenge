@@ -3,7 +3,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class CuadradadoTest
+    public class CuadradadoTest : IFormaTest
     {
         private Cuadrado _cuadrado;
         public CuadradadoTest()
@@ -12,7 +12,7 @@
         }
 
         [TestCase]
-        public void TestRetornaCuatroSiSeCalculaElArea()
+        public void TestRetornaValorSiSeCalculaElArea()
         {
             decimal valorEsperado = 36;
             decimal area = _cuadrado.CalcularArea();
@@ -21,7 +21,7 @@
         }
 
         [TestCase]
-        public void TestRetornaVeintiCuatroSiSeCalculaElPerimetro()
+        public void TestRetornaValorSiSeCalculaElPerimetro()
         {
             decimal valorEsperado = 24;
             decimal perimetro = _cuadrado.CalcularPerimetro();
@@ -29,10 +29,17 @@
         }
 
         [TestCase]
-        public void TestAlInvocarSuKeyDevuelveCuadrado()
+        public void TestAlInvocarSuKeyDevuelveNombreSingular()
         {
             string valorEsperado = "Cuadrado";
             Assert.AreEqual(valorEsperado, _cuadrado.Key.ToString());
+        }
+
+        [TestCase]
+        public void TestAlInvocarSuPluralDevuelveNombrePlural()
+        {
+            string valorEsperado = "Cuadrados";
+            Assert.AreEqual(valorEsperado, _cuadrado.Plural.ToString());
         }
     }
 }
